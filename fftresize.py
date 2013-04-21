@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+# Copyright 2013, Mansour Moufid <mansourmoufid@gmail.com>
 
 from matplotlib import image, pyplot
 from numpy import append, array, real, zeros
