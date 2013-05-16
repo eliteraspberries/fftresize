@@ -1,5 +1,9 @@
 #!/usr/bin/env python2
-# Copyright 2013, Mansour Moufid <mansourmoufid@gmail.com>
+
+'''Resize images using the FFT
+
+FFTresize resizes images using zero-padding in the frequency domain.
+'''
 
 
 from matplotlib import image, pyplot
