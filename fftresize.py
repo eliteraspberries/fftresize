@@ -3,14 +3,14 @@
 
 
 from matplotlib import image, pyplot
-from numpy import append, array as _array, real, zeros as _zeros
+from numpy import append, real, zeros as _zeros
 from numpy.fft import fft2, ifft2, fftshift, ifftshift
 try:
     from os import EX_NOINPUT as _EX_NOINPUT
     from os import EX_USAGE as _EX_USAGE
 except ImportError:
     _EX_NOINPUT, _EX_USAGE = 1, 2
-from os.path import basename, exists, splitext
+from os.path import exists, splitext
 from random import randint
 from sys import argv as _argv, exit as _exit, stderr as _stderr
 
