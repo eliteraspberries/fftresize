@@ -3,6 +3,8 @@
 '''Resize images using the FFT
 
 FFTresize resizes images using zero-padding in the frequency domain.
+
+Only monochromatic images with no transparency are supported.
 '''
 
 
