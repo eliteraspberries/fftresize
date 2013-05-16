@@ -16,6 +16,9 @@ from sys import argv as _argv, exit as _exit, stderr as _stderr
 
 
 def _zeropad2(x, shape):
+    '''Pad a two-dimensional NumPy array with zeros along its borders
+    to the specified shape.
+    '''
     m, n = x.shape
     p, q = shape
     assert p > m
@@ -30,6 +33,8 @@ def _zeropad2(x, shape):
 
 
 def resize(filename, factor=1.5):
+    '''Resize an image by zero-padding in the frequency domain.
+    '''
     img = image.imread(filename)
     fft = fft2(img)
     fft = fftshift(fft)
