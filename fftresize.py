@@ -44,18 +44,28 @@ def _zeropad2(x, shape):
     return x
 
 
-def resize(filename, factor=1.5):
-    '''Resize an image by zero-padding in the frequency domain.
+def _fft_interp(array, dim):
+    '''Interpolate a two-dimensional NumPy array using zero-padding
+    in the frequency domain.
     '''
-    img = image.imread(filename)
-    fft = fft2(img)
+    fft = fft2(array)
     fft = fftshift(fft)
-    reshape = lambda (x, y), a: (int(a * x), int(a * y))
-    fft = _zeropad2(fft, reshape(img.shape, factor))
+    fft = _zeropad2(fft, dim)
     ifft = ifftshift(fft)
     ifft = ifft2(ifft)
     ifft = real(ifft)
     return ifft
+
+
+def resize(filename, factor=1.5):
+    '''Resize an image by zero-padding in the frequency domain.
+
+    Return the filename of the resized image.
+    '''
+    img = image.imread(filename)
+    reshape = lambda (x, y), a: (int(a * x), int(a * y))
+    new = _fft_interp(img, reshape(img.shape, factor))
+    return _save(new, filename)
 
 
 def _save(img, file):
@@ -95,4 +105,4 @@ if '__main__' in __name__:
         x = resize(file, factor)
     except NameError:
         x = resize(file)
-    print _save(x, file)
+    print x
