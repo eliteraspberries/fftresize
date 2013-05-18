@@ -68,7 +68,12 @@ def resize(filename, factor=1.5):
     '''
     img = image.imread(filename)
     reshape = lambda (x, y), a: (int(a * x), int(a * y))
-    new = _fft_interp(img, reshape(img.shape, factor))
+    newsize = reshape(img.shape, factor)
+    if (newsize[0] - img.shape[0]) % 2 != 0:
+        newsize = (newsize[0] + 1, newsize[1]) + newsize[2:]
+    if (newsize[1] - img.shape[1]) % 2 != 0:
+        newsize = (newsize[0], newsize[1] + 1) + newsize[2:]
+    new = _fft_interp(img, newsize)
     return _save(new, filename)
 
 
