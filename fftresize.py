@@ -3,8 +3,6 @@
 '''Resize images using the FFT
 
 FFTresize resizes images using zero-padding in the frequency domain.
-
-Only monochromatic images with no transparency are supported.
 '''
 
 
@@ -67,13 +65,22 @@ def resize(filename, factor=1.5):
     Return the filename of the resized image.
     '''
     img = image.imread(filename)
-    reshape = lambda (x, y), a: (int(a * x), int(a * y))
-    newsize = reshape(img.shape, factor)
+    reshape = lambda a, x, y, z=1: (int(a * x), int(a * y), z)
+    newsize = reshape(factor, *img.shape)
     if (newsize[0] - img.shape[0]) % 2 != 0:
         newsize = (newsize[0] + 1, newsize[1]) + newsize[2:]
     if (newsize[1] - img.shape[1]) % 2 != 0:
         newsize = (newsize[0], newsize[1] + 1) + newsize[2:]
-    new = _fft_interp(img, newsize)
+    channels = lambda x, y, z=1: z
+    nchannels = channels(*img.shape)
+    if nchannels == 1:
+        new = _fft_interp(img, newsize[:2])
+    else:
+        new = _zeros(newsize)
+        for i in range(nchannels):
+            rgb = img[:, :, i]
+            newrgb = _fft_interp(rgb, newsize[:2])
+            new[:, :, i] = newrgb
     return _save(new, filename)
 
 
@@ -98,7 +105,11 @@ def _save(img, file):
             break
     _normalize(img)
     touint8 = lambda x: around(x * 255, decimals=0).astype('uint8')
-    pyplot.imsave(newfile, touint8(img), cmap=pyplot.cm.gray)
+    if len(img.shape) == 2 or img.shape[2] == 1:
+        cmap = pyplot.cm.gray
+    else:
+        cmap = None
+    pyplot.imsave(newfile, touint8(img), cmap=cmap)
     return newfile
 
 
