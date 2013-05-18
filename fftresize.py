@@ -9,7 +9,7 @@ Only monochromatic images with no transparency are supported.
 
 
 from matplotlib import image, pyplot
-from numpy import append, real, zeros as _zeros
+from numpy import append, around, real, zeros as _zeros
 from numpy.fft import fft2, ifft2, fftshift, ifftshift
 try:
     from os import EX_NOINPUT as _EX_NOINPUT
@@ -76,10 +76,8 @@ def _save(img, file):
         newfile = newfile + str(randint(0, 1000)) + '.png'
         if not exists(newfile):
             break
-    swap = lambda (x, y): (y, x)
-    fig = pyplot.figure(figsize=swap(img.shape), dpi=1)
-    fig.figimage(img, cmap=pyplot.cm.gray)
-    pyplot.savefig(newfile, dpi=1)
+    touint8 = lambda x: around(x * 255, decimals=0).astype('uint8')
+    pyplot.imsave(newfile, touint8(img), cmap=pyplot.cm.gray)
     return newfile
 
 
