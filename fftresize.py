@@ -10,6 +10,7 @@ Only monochromatic images with no transparency are supported.
 
 from matplotlib import image, pyplot
 from numpy import append, around, real, zeros as _zeros
+from numpy import amax, amin
 from numpy.fft import fft2, ifft2, fftshift, ifftshift
 try:
     from os import EX_NOINPUT as _EX_NOINPUT
@@ -19,6 +20,7 @@ except ImportError:
 from os.path import exists, splitext
 from random import randint
 from sys import argv as _argv, exit as _exit, stderr as _stderr
+from sys import float_info as _float_info
 
 
 __author__ = 'Mansour Moufid'
@@ -70,12 +72,26 @@ def resize(filename, factor=1.5):
     return _save(new, filename)
 
 
+def _normalize(array):
+    min = amin(array)
+    max = amax(array)
+    array -= min
+    array /= max - min
+    eps = 10.0 * _float_info.epsilon
+    negs = array < 0.0 + eps
+    array[negs] = 0.0
+    bigs = array > 1.0 - eps
+    array[bigs] = 1.0
+    return
+
+
 def _save(img, file):
     while True:
         newfile = splitext(file)[0] + '-'
         newfile = newfile + str(randint(0, 1000)) + '.png'
         if not exists(newfile):
             break
+    _normalize(img)
     touint8 = lambda x: around(x * 255, decimals=0).astype('uint8')
     pyplot.imsave(newfile, touint8(img), cmap=pyplot.cm.gray)
     return newfile
