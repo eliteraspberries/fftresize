@@ -59,6 +59,9 @@ def _fft_interp(array, dim):
     return ifft
 
 
+_channels = lambda x, y, z=1: z
+
+
 def resize(filename, factor=1.5):
     '''Resize an image by zero-padding in the frequency domain.
 
@@ -71,8 +74,7 @@ def resize(filename, factor=1.5):
         newsize = (newsize[0] + 1, newsize[1]) + newsize[2:]
     if (newsize[1] - img.shape[1]) % 2 != 0:
         newsize = (newsize[0], newsize[1] + 1) + newsize[2:]
-    channels = lambda x, y, z=1: z
-    nchannels = channels(*img.shape)
+    nchannels = _channels(*img.shape)
     if nchannels == 1:
         new = _fft_interp(img, newsize[:2])
     else:
@@ -105,7 +107,7 @@ def _save(img, file):
             break
     _normalize(img)
     touint8 = lambda x: around(x * 255, decimals=0).astype('uint8')
-    if len(img.shape) == 2 or img.shape[2] == 1:
+    if _channels(*img.shape) == 1:
         cmap = pyplot.cm.gray
     else:
         cmap = None
