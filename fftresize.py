@@ -7,7 +7,7 @@ FFTresize resizes images using zero-padding in the frequency domain.
 
 
 from matplotlib import image, pyplot
-from numpy import append, around, real, zeros as _zeros
+from numpy import around, complex64, real, zeros as _zeros
 from numpy import amax, amin
 from numpy.fft import fft2, ifft2, fftshift, ifftshift
 try:
@@ -37,13 +37,11 @@ def _zeropad2(x, shape):
     p, q = shape
     assert p > m
     assert q > n
-    tb = _zeros(((p - m) / 2, n))
-    lr = _zeros((p, (q - n) / 2))
-    x = append(tb, x, axis=0)
-    x = append(x, tb, axis=0)
-    x = append(lr, x, axis=1)
-    x = append(x, lr, axis=1)
-    return x
+    tb = (p - m) / 2
+    lr = (q - n) / 2
+    xpadded = _zeros(shape, dtype=complex64)
+    xpadded[tb:tb + m, lr:lr + n] = x
+    return xpadded
 
 
 def _fft_interp(array, dim):
