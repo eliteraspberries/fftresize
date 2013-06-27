@@ -34,12 +34,11 @@ def _zeropad2(x, shape):
 def _fft_interp(array, factor):
     '''Interpolate a two-dimensional NumPy array by a given factor.
     '''
-    reshape = lambda a, (x, y): (int(a * x), int(a * y))
+    reshape = lambda a, (x, y): [int(a * x), int(a * y)]
     newsize = reshape(factor, array.shape)
-    if (newsize[0] - array.shape[0]) % 2 != 0:
-        newsize = (newsize[0] + 1, newsize[1])
-    if (newsize[1] - array.shape[1]) % 2 != 0:
-        newsize = (newsize[0], newsize[1] + 1)
+    nexteven = lambda x: x if (x % 2 == 0) else x + 1
+    newsize = map(nexteven, newsize)
+    newsize = tuple(newsize)
     fft = fft2(array)
     fft = fftshift(fft)
     fft = _zeropad2(fft, newsize)
