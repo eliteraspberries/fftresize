@@ -6,10 +6,10 @@ FFTresize resizes images using zero-padding in the frequency domain.
 '''
 
 
+from fftinterp import _fft_interp
 from matplotlib import image, pyplot
-from numpy import around, complex64, real, zeros as _zeros
+from numpy import around, zeros as _zeros
 from numpy import amax, amin
-from numpy.fft import fft2, ifft2, fftshift, ifftshift
 try:
     from os import EX_NOINPUT as _EX_NOINPUT
     from os import EX_USAGE as _EX_USAGE
@@ -27,34 +27,6 @@ __license__ = 'ISC'
 __version__ = '0.1'
 __email__ = 'mansourmoufid@gmail.com'
 __status__ = 'Development'
-
-
-def _zeropad2(x, shape):
-    '''Pad a two-dimensional NumPy array with zeros along its borders
-    to the specified shape.
-    '''
-    m, n = x.shape
-    p, q = shape
-    assert p > m
-    assert q > n
-    tb = (p - m) / 2
-    lr = (q - n) / 2
-    xpadded = _zeros(shape, dtype=complex64)
-    xpadded[tb:tb + m, lr:lr + n] = x
-    return xpadded
-
-
-def _fft_interp(array, dim):
-    '''Interpolate a two-dimensional NumPy array using zero-padding
-    in the frequency domain.
-    '''
-    fft = fft2(array)
-    fft = fftshift(fft)
-    fft = _zeropad2(fft, dim)
-    ifft = ifftshift(fft)
-    ifft = ifft2(ifft)
-    ifft = real(ifft)
-    return ifft
 
 
 _channels = lambda x, y, z=1: z
