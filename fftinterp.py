@@ -31,13 +31,18 @@ def _zeropad2(x, shape):
     return xpadded
 
 
-def _fft_interp(array, dim):
-    '''Interpolate a two-dimensional NumPy array using zero-padding
-    in the frequency domain.
+def _fft_interp(array, factor):
+    '''Interpolate a two-dimensional NumPy array by a given factor.
     '''
+    reshape = lambda a, (x, y): (int(a * x), int(a * y))
+    newsize = reshape(factor, array.shape)
+    if (newsize[0] - array.shape[0]) % 2 != 0:
+        newsize = (newsize[0] + 1, newsize[1])
+    if (newsize[1] - array.shape[1]) % 2 != 0:
+        newsize = (newsize[0], newsize[1] + 1)
     fft = fft2(array)
     fft = fftshift(fft)
-    fft = _zeropad2(fft, dim)
+    fft = _zeropad2(fft, newsize)
     ifft = ifftshift(fft)
     ifft = ifft2(ifft)
     ifft = real(ifft)

@@ -38,20 +38,18 @@ def resize(filename, factor=1.5):
     Return the filename of the resized image.
     '''
     img = image.imread(filename)
-    reshape = lambda a, x, y, z=1: (int(a * x), int(a * y), z)
-    newsize = reshape(factor, *img.shape)
-    if (newsize[0] - img.shape[0]) % 2 != 0:
-        newsize = (newsize[0] + 1, newsize[1]) + newsize[2:]
-    if (newsize[1] - img.shape[1]) % 2 != 0:
-        newsize = (newsize[0], newsize[1] + 1) + newsize[2:]
     nchannels = _channels(*img.shape)
     if nchannels == 1:
-        new = _fft_interp(img, newsize[:2])
+        new = _fft_interp(img, factor)
     else:
-        new = _zeros(newsize)
+        new = None
         for i in range(nchannels):
             rgb = img[:, :, i]
-            newrgb = _fft_interp(rgb, newsize[:2])
+            newrgb = _fft_interp(rgb, factor)
+            if new is None:
+                newsize = list(newrgb.shape)
+                newsize.append(_channels(*img.shape))
+                new = _zeros(tuple(newsize))
             new[:, :, i] = newrgb
     return _save(new, filename)
 
