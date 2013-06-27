@@ -7,18 +7,15 @@ FFTresize resizes images using zero-padding in the frequency domain.
 
 
 from fftinterp import interp2
-from matplotlib import image, pyplot
-from numpy import around, zeros as _zeros
-from numpy import amax, amin
+import imutils
+from numpy import zeros as _zeros
 try:
     from os import EX_NOINPUT as _EX_NOINPUT
     from os import EX_USAGE as _EX_USAGE
 except ImportError:
     _EX_NOINPUT, _EX_USAGE = 1, 2
-from os.path import exists, splitext
-from random import randint
+from os.path import exists
 from sys import argv as _argv, exit as _exit, stderr as _stderr
-from sys import float_info as _float_info
 
 
 __author__ = 'Mansour Moufid'
@@ -37,7 +34,7 @@ def resize(filename, factor=1.5):
 
     Return the filename of the resized image.
     '''
-    img = image.imread(filename)
+    img = imutils.read(filename)
     nchannels = _channels(*img.shape)
     if nchannels == 1:
         new = interp2(img, factor)
@@ -51,36 +48,7 @@ def resize(filename, factor=1.5):
                 newsize.append(_channels(*img.shape))
                 new = _zeros(tuple(newsize))
             new[:, :, i] = newrgb
-    return _save(new, filename)
-
-
-def _normalize(array):
-    min = amin(array)
-    max = amax(array)
-    array -= min
-    array /= max - min
-    eps = 10.0 * _float_info.epsilon
-    negs = array < 0.0 + eps
-    array[negs] = 0.0
-    bigs = array > 1.0 - eps
-    array[bigs] = 1.0
-    return
-
-
-def _save(img, file):
-    while True:
-        newfile = splitext(file)[0] + '-'
-        newfile = newfile + str(randint(0, 1000)) + '.png'
-        if not exists(newfile):
-            break
-    _normalize(img)
-    touint8 = lambda x: around(x * 255, decimals=0).astype('uint8')
-    if _channels(*img.shape) == 1:
-        cmap = pyplot.cm.gray
-    else:
-        cmap = None
-    pyplot.imsave(newfile, touint8(img), cmap=cmap)
-    return newfile
+    return imutils.save(new, filename)
 
 
 def _fail(code):

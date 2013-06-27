@@ -1,0 +1,67 @@
+#!/usr/bin/env python2
+
+'''Read and write image files as NumPy arrays
+'''
+
+
+from matplotlib import image, pyplot
+from numpy import amax, amin, around
+from os.path import exists, splitext
+from random import randint
+from sys import float_info as _float_info
+
+
+__author__ = 'Mansour Moufid'
+__copyright__ = 'Copyright 2013, Mansour Moufid'
+__license__ = 'ISC'
+__version__ = '0.1'
+__email__ = 'mansourmoufid@gmail.com'
+__status__ = 'Development'
+
+
+'''The number of 2D channels in a 3D array.
+'''
+_channels = lambda x, y, z=1: z
+
+
+def _normalize(array):
+    '''Normalize an array to the interval [0,1].
+    '''
+    min = amin(array)
+    max = amax(array)
+    array -= min
+    array /= max - min
+    eps = 10.0 * _float_info.epsilon
+    negs = array < 0.0 + eps
+    array[negs] = 0.0
+    bigs = array > 1.0 - eps
+    array[bigs] = 1.0
+    return
+
+
+def read(file):
+    '''Return an array representing an image file.
+    '''
+    return image.imread(file)
+
+
+def save(img, file):
+    '''Save an array as a unique image file and return its path.
+    '''
+    while True:
+        newfile = splitext(file)[0] + '-'
+        newfile = newfile + str(randint(0, 1000)) + '.png'
+        if not exists(newfile):
+            break
+    _normalize(img)
+    touint8 = lambda x: around(x * 255, decimals=0).astype('uint8')
+    if _channels(*img.shape) == 1:
+        cmap = pyplot.cm.gray
+    else:
+        cmap = None
+    pyplot.imsave(newfile, touint8(img), cmap=cmap)
+    return newfile
+
+
+if __name__ == '__main__':
+    pass
