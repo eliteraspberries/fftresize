@@ -19,9 +19,11 @@ __email__ = 'mansourmoufid@gmail.com'
 __status__ = 'Development'
 
 
-'''The number of 2D channels in a 3D array.
-'''
-_channels = lambda x, y, z=1: z
+def channels(img):
+    '''The number of 2D channels in a 3D array.
+    '''
+    _channels = lambda x, y, z=1: z
+    return _channels(*img.shape)
 
 
 def _normalize(array):
@@ -56,7 +58,7 @@ def save(img, file):
     _normalize(img)
     uint8img = _zeros(img.shape, dtype=uint8)
     around(img * 255, out=uint8img)
-    if _channels(*img.shape) == 1:
+    if channels(img) == 1:
         cmap = pyplot.cm.gray
     else:
         cmap = None

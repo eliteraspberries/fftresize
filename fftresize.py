@@ -26,16 +26,13 @@ __email__ = 'mansourmoufid@gmail.com'
 __status__ = 'Development'
 
 
-_channels = lambda x, y, z=1: z
-
-
 def resize(filename, factor=1.5):
     '''Resize an image by zero-padding in the frequency domain.
 
     Return the filename of the resized image.
     '''
     img = imutils.read(filename)
-    nchannels = _channels(*img.shape)
+    nchannels = imutils.channels(img)
     if nchannels == 1:
         new = interp2(img, factor)
     else:
@@ -45,7 +42,7 @@ def resize(filename, factor=1.5):
             newrgb = interp2(rgb, factor)
             if new is None:
                 newsize = list(newrgb.shape)
-                newsize.append(_channels(*img.shape))
+                newsize.append(imutils.channels(img))
                 new = _zeros(tuple(newsize))
             new[:, :, i] = newrgb
     return imutils.save(new, filename)
