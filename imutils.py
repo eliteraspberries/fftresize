@@ -5,7 +5,7 @@
 
 
 from matplotlib import image, pyplot
-from numpy import amax, amin, around
+from numpy import amax, amin, around, uint8, zeros as _zeros
 from os.path import exists, splitext
 from random import randint
 from sys import float_info as _float_info
@@ -54,12 +54,13 @@ def save(img, file):
         if not exists(newfile):
             break
     _normalize(img)
-    touint8 = lambda x: around(x * 255, decimals=0).astype('uint8')
+    uint8img = _zeros(img.shape, dtype=uint8)
+    around(img * 255, out=uint8img)
     if _channels(*img.shape) == 1:
         cmap = pyplot.cm.gray
     else:
         cmap = None
-    pyplot.imsave(newfile, touint8(img), cmap=cmap)
+    pyplot.imsave(newfile, uint8img, cmap=cmap)
     return newfile
 
 
