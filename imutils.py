@@ -14,7 +14,7 @@ from sys import float_info as _float_info
 __author__ = 'Mansour Moufid'
 __copyright__ = 'Copyright 2013, Mansour Moufid'
 __license__ = 'ISC'
-__version__ = '0.1'
+__version__ = '0.2'
 __email__ = 'mansourmoufid@gmail.com'
 __status__ = 'Development'
 
