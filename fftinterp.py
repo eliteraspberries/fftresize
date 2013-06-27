@@ -31,7 +31,7 @@ def _zeropad2(x, shape):
     return xpadded
 
 
-def _fft_interp(array, factor):
+def interp2(array, factor):
     '''Interpolate a two-dimensional NumPy array by a given factor.
     '''
     reshape = lambda a, (x, y): [int(a * x), int(a * y)]

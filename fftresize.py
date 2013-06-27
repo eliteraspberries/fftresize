@@ -6,7 +6,7 @@ FFTresize resizes images using zero-padding in the frequency domain.
 '''
 
 
-from fftinterp import _fft_interp
+from fftinterp import interp2
 from matplotlib import image, pyplot
 from numpy import around, zeros as _zeros
 from numpy import amax, amin
@@ -40,12 +40,12 @@ def resize(filename, factor=1.5):
     img = image.imread(filename)
     nchannels = _channels(*img.shape)
     if nchannels == 1:
-        new = _fft_interp(img, factor)
+        new = interp2(img, factor)
     else:
         new = None
         for i in range(nchannels):
             rgb = img[:, :, i]
-            newrgb = _fft_interp(rgb, factor)
+            newrgb = interp2(rgb, factor)
             if new is None:
                 newsize = list(newrgb.shape)
                 newsize.append(_channels(*img.shape))
