@@ -6,9 +6,10 @@ FFTresize resizes images using zero-padding in the frequency domain.
 '''
 
 
-from fftinterp import interp2
-import imutils
 from numpy import zeros as _zeros
+
+from . import fftinterp
+from . import imutils
 
 
 __author__ = 'Mansour Moufid'
@@ -27,12 +28,12 @@ def resize(filename, factor=1.5):
     img = imutils.read(filename)
     nchannels = imutils.channels(img)
     if nchannels == 1:
-        new = interp2(img, factor)
+        new = fftinterp.interp2(img, factor)
     else:
         new = None
         for i in range(nchannels):
             rgb = img[:, :, i]
-            newrgb = interp2(rgb, factor)
+            newrgb = fftinterp.interp2(rgb, factor)
             if new is None:
                 newsize = list(newrgb.shape)
                 newsize.append(imutils.channels(img))
