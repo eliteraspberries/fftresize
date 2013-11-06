@@ -8,14 +8,6 @@ from numpy import complex64, real, zeros as _zeros
 from numpy.fft import fft2, ifft2, fftshift, ifftshift
 
 
-__author__ = 'Mansour Moufid'
-__copyright__ = 'Copyright 2013, Mansour Moufid'
-__license__ = 'ISC'
-__version__ = '0.2'
-__email__ = 'mansourmoufid@gmail.com'
-__status__ = 'Development'
-
-
 def _zeropad2(x, shape):
     '''Pad a two-dimensional NumPy array with zeros along its borders
     to the specified shape.
