@@ -1,10 +1,8 @@
 #!/usr/bin/env python2
 
-'''Resize images using the FFT
-
-FFTresize resizes images using zero-padding in the frequency domain.
+'''FFTresize resizes images using zero-padding in the frequency
+domain.
 '''
-
 
 from numpy import zeros as _zeros
 
