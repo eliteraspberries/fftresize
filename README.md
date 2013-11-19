@@ -11,8 +11,8 @@ FFTresize consists of a package and a script.
 
 To install these from the source code,
 
-    gunzip < FFTresize-0.4.tar.gz | tar -xf -
-    cd FFTresize-0.4/
+    gunzip < FFTresize-0.4.1.tar.gz | tar -xf -
+    cd FFTresize-0.4.1/
     python setup.py install
 
 or with pip,
