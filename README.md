@@ -9,13 +9,13 @@ FFTresize requires docopt, PIL, NumPy, and matplotlib.
 
 FFTresize consists of a package and a script.
 
-To install these from the source code:
+To install these from the source code,
 
     gunzip < FFTresize-0.4.tar.gz | tar -xf -
     cd FFTresize-0.4/
     python setup.py install
 
-or with pip:
+or with pip,
 
     pip install fftresize
 
