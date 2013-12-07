@@ -26,7 +26,7 @@ _setup_args = {
     'license':          fftresize.__license__,
     'long_description': _long_description,
     'name':             'FFTresize',
-    'url':              'https://code.google.com/p/fftresize',
+    'url':              'https://bitbucket.org/mansourm/fftresize',
     'version':          fftresize.__version__,
 }
 
