@@ -37,3 +37,17 @@ the image (1.0 meaning no change).
     Options:
         -h, --help      Print this help.
         -v, --version   Print version information.
+
+
+Example
+=======
+
+Below is an example image, resized to twice its original size.
+
+![][example-img]
+
+![][resized-img]
+
+
+[example-img]: http://www.eliteraspberries.com/images/drink.png
+[resized-img]: http://www.eliteraspberries.com/images/drink-2x.png
