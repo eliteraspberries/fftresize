@@ -12,8 +12,8 @@ To install these from the source code,
 
 ::
 
-    gunzip < FFTresize-0.4.2.tar.gz | tar -xf -
-    cd FFTresize-0.4.2/
+    gunzip < FFTresize-0.4.3.tar.gz | tar -xf -
+    cd FFTresize-0.4.3/
     python setup.py install
 
 or with pip,
