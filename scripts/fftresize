@@ -16,9 +16,8 @@ Options:
 from docopt import docopt
 try:
     from os import EX_NOINPUT as _EX_NOINPUT
-    from os import EX_USAGE as _EX_USAGE
 except ImportError:
-    _EX_NOINPUT, _EX_USAGE = 1, 2
+    _EX_NOINPUT = 1
 from os.path import exists
 from sys import exit as _exit
 
