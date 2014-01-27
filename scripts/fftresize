@@ -15,11 +15,11 @@ Options:
 
 from docopt import docopt
 try:
-    from os import EX_NOINPUT as _EX_NOINPUT
+    from os import EX_NOINPUT
 except ImportError:
-    _EX_NOINPUT = 1
+    EX_NOINPUT = 1
 from os.path import exists
-from sys import exit as _exit
+from sys import exit
 
 from fftresize import fftresize
 
@@ -33,7 +33,7 @@ if '__main__' in __name__:
 
     image = arguments['<image>']
     if not exists(image):
-        _exit(_EX_NOINPUT)
+        exit(EX_NOINPUT)
 
     factor = float(arguments['<factor>'])
 
