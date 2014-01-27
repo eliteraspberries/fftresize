@@ -15,11 +15,11 @@ Options:
 
 from docopt import docopt
 try:
-    from os import EX_NOINPUT
+    from os import EX_NOINPUT, EX_USAGE
 except ImportError:
-    EX_NOINPUT = 1
+    EX_NOINPUT, EX_USAGE = 1, 2
 from os.path import abspath, exists, expanduser
-from sys import exit, stderr
+from sys import exit, float_info, stderr
 
 from fftresize import fftresize
 
@@ -42,6 +42,9 @@ if '__main__' in __name__:
         exit(EX_NOINPUT)
 
     factor = float(arguments['<factor>'])
+    if factor < 1.0 + float_info.epsilon:
+        error('factor must be greater than 1.0')
+        exit(EX_USAGE)
 
     x = fftresize.resize(image, factor)
     print x
