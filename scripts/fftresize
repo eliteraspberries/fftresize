@@ -18,8 +18,8 @@ try:
     from os import EX_NOINPUT
 except ImportError:
     EX_NOINPUT = 1
-from os.path import exists
-from sys import exit
+from os.path import abspath, exists, expanduser
+from sys import exit, stderr
 
 from fftresize import fftresize
 
@@ -32,6 +32,7 @@ if '__main__' in __name__:
     arguments = docopt(__doc__, version=_long_version)
 
     image = arguments['<image>']
+    image = abspath(expanduser(image))
     if not exists(image):
         exit(EX_NOINPUT)
 
