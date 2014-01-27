@@ -27,6 +27,10 @@ from fftresize import fftresize
 _long_version = 'FFTresize ' + fftresize.__version__
 
 
+def error(msg):
+    print>>stderr, 'fftresize: error:', msg
+
+
 if '__main__' in __name__:
 
     arguments = docopt(__doc__, version=_long_version)
@@ -34,6 +38,7 @@ if '__main__' in __name__:
     image = arguments['<image>']
     image = abspath(expanduser(image))
     if not exists(image):
+        error('could not find file: ' + image)
         exit(EX_NOINPUT)
 
     factor = float(arguments['<factor>'])
