@@ -57,6 +57,12 @@ def _pyplot_save(img, filename):
     return
 
 
+def _pil_save(img, filename):
+    pil_img = Image.fromarray(img)
+    pil_img.save(filename)
+    return
+
+
 def save(img, filename):
     '''Save an array as a unique image file and return its path.
     '''
@@ -68,7 +74,7 @@ def save(img, filename):
     _normalize(img)
     uint8img = _zeros(img.shape, dtype=uint8)
     around(img * 255, out=uint8img)
-    _pyplot_save(uint8img, newfile)
+    _pil_save(uint8img, newfile)
     return newfile
 
 
