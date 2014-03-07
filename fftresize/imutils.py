@@ -4,7 +4,6 @@
 '''
 
 
-from matplotlib import pyplot
 from numpy import amax, amin, around, asarray, zeros as _zeros
 from numpy import float32, uint8
 from os.path import exists, splitext
@@ -46,15 +45,6 @@ def read(filename, dtype=None):
     img = Image.open(filename)
     arr = asarray(img, dtype=dtype)
     return arr
-
-
-def _pyplot_save(img, filename):
-    if channels(img) == 1:
-        cmap = pyplot.cm.gray
-    else:
-        cmap = None
-    pyplot.imsave(filename, img, cmap=cmap)
-    return
 
 
 def _pil_save(img, filename):

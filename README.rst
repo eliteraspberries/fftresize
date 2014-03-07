@@ -4,7 +4,7 @@ domain.
 Installation
 ============
 
-FFTresize requires docopt, PIL, NumPy, and matplotlib.
+FFTresize requires docopt, PIL, and NumPy.
 
 FFTresize consists of a package and a script.
 
