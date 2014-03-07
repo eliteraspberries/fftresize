@@ -48,6 +48,15 @@ def read(filename, dtype=None):
     return arr
 
 
+def _pyplot_save(img, filename):
+    if channels(img) == 1:
+        cmap = pyplot.cm.gray
+    else:
+        cmap = None
+    pyplot.imsave(filename, img, cmap=cmap)
+    return
+
+
 def save(img, filename):
     '''Save an array as a unique image file and return its path.
     '''
@@ -59,11 +68,7 @@ def save(img, filename):
     _normalize(img)
     uint8img = _zeros(img.shape, dtype=uint8)
     around(img * 255, out=uint8img)
-    if channels(img) == 1:
-        cmap = pyplot.cm.gray
-    else:
-        cmap = None
-    pyplot.imsave(newfile, uint8img, cmap=cmap)
+    _pyplot_save(uint8img, newfile)
     return newfile
 
 
