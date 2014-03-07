@@ -33,17 +33,17 @@ def _normalize(array):
     return
 
 
-def read(file):
+def read(filename):
     '''Return an array representing an image file.
     '''
-    return image.imread(file)
+    return image.imread(filename)
 
 
-def save(img, file):
+def save(img, filename):
     '''Save an array as a unique image file and return its path.
     '''
     while True:
-        newfile = splitext(file)[0] + '-'
+        newfile = splitext(filename)[0] + '-'
         newfile = newfile + str(randint(0, 1000)) + '.png'
         if not exists(newfile):
             break

@@ -15,8 +15,8 @@ _classifiers = [
     'Topic :: Multimedia :: Graphics',
 ]
 
-with open('README.rst', 'r') as file:
-    _long_description = file.read()
+with open('README.rst', 'r') as rst_file:
+    _long_description = rst_file.read()
 
 _setup_args = {
     'author':           fftresize.__author__,
