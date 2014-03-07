@@ -4,11 +4,16 @@
 '''
 
 
-from matplotlib import image, pyplot
-from numpy import amax, amin, around, uint8, zeros as _zeros
+from matplotlib import pyplot
+from numpy import amax, amin, around, asarray, zeros as _zeros
+from numpy import float32, uint8
 from os.path import exists, splitext
+from PIL import Image
 from random import randint
 from sys import float_info as _float_info
+
+
+DEFAULT_DTYPE = float32
 
 
 def channels(img):
@@ -33,10 +38,14 @@ def _normalize(array):
     return
 
 
-def read(filename):
+def read(filename, dtype=None):
     '''Return an array representing an image file.
     '''
-    return image.imread(filename)
+    if dtype is None:
+        dtype = DEFAULT_DTYPE
+    img = Image.open(filename)
+    arr = asarray(img, dtype=dtype)
+    return arr
 
 
 def save(img, filename):
