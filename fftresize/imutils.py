@@ -4,7 +4,7 @@
 '''
 
 
-from numpy import amax, amin, around, asarray, zeros as _zeros
+from numpy import around, asarray, mean, std, zeros as _zeros
 from numpy import float32, uint8
 from os.path import exists, splitext
 from PIL import Image
@@ -25,8 +25,10 @@ def channels(img):
 def _normalize(array):
     '''Normalize an array to the interval [0,1].
     '''
-    min = amin(array)
-    max = amax(array)
+    mu = mean(array)
+    rho2 = std(array)
+    min = mu - 2.0 * rho2
+    max = mu + 2.0 * rho2
     array -= min
     array /= max - min
     eps = 10.0 * _float_info.epsilon
