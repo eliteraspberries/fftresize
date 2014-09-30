@@ -6,8 +6,8 @@ domain.
 
 from numpy import zeros as _zeros
 
+from avena import image, utils
 from . import fftinterp
-from . import imutils
 
 
 __author__ = 'Mansour Moufid'
@@ -23,8 +23,8 @@ def resize(filename, factor=1.5):
 
     Return the filename of the resized image.
     '''
-    img = imutils.read(filename)
-    nchannels = imutils.channels(img)
+    img = image.read(filename)
+    nchannels = utils.depth(img)
     if nchannels == 1:
         new = fftinterp.interp2(img, factor)
     else:
@@ -34,10 +34,10 @@ def resize(filename, factor=1.5):
             newrgb = fftinterp.interp2(rgb, factor)
             if new is None:
                 newsize = list(newrgb.shape)
-                newsize.append(imutils.channels(img))
+                newsize.append(nchannels)
                 new = _zeros(tuple(newsize))
             new[:, :, i] = newrgb
-    return imutils.save(new, filename)
+    return image.save(new, filename, random=True)
 
 
 if '__main__' in __name__:
