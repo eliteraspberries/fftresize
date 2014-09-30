@@ -33,5 +33,5 @@ _setup_args = {
 
 if __name__ == '__main__':
 
-    setup(packages=['fftresize'], scripts=['scripts/fftresize'],
+    setup(packages=['avena', 'fftresize'], scripts=['scripts/fftresize'],
           **_setup_args)
