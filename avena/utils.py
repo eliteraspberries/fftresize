@@ -35,5 +35,15 @@ def rand_filename(filename, ext=None):
     return rand_file_name
 
 
+def swap_rgb(img, rgb):
+    '''Swap the RBG channels of an image array.'''
+    if depth(img) == 3 and not rgb == _PREFERRED_RGB:
+        rgb_inv = _invert_dict(rgb)
+        rgb_order = [rgb_inv[k] for k in [0, 1, 2]]
+        swap_indices = [_PREFERRED_RGB[k] for k in rgb_order]
+        img = img[:, :, swap_indices]
+    return img
+
+
 if __name__ == '__main__':
     pass
