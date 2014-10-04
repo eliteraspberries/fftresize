@@ -18,6 +18,9 @@ __email__ = 'mansourmoufid@gmail.com'
 __status__ = 'Development'
 
 
+_EXT = '.png'
+
+
 def resize(filename, factor=1.5):
     '''Resize an image by zero-padding in the frequency domain.
 
@@ -37,7 +40,7 @@ def resize(filename, factor=1.5):
                 newsize.append(nchannels)
                 new = _zeros(tuple(newsize))
             new[:, :, i] = newrgb
-    return image.save(new, filename, random=True)
+    return image.save(new, filename, random=True, ext=_EXT)
 
 
 if '__main__' in __name__:
