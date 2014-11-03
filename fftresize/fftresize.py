@@ -40,7 +40,7 @@ def resize(filename, factor=1.5):
                 newsize.append(nchannels)
                 new = _zeros(tuple(newsize))
             new[:, :, i] = newrgb
-    return image.save(new, filename, random=True, ext=_EXT)
+    return image.save(new, filename, random=True, ext=_EXT, normalize=True)
 
 
 if '__main__' in __name__:

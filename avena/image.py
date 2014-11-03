@@ -28,11 +28,13 @@ def get_channels(img):
             yield img[:, :, i]
 
 
-def read(filename, dtype=_DEFAULT_DTYPE):
+def read(filename, dtype=_DEFAULT_DTYPE, normalize=True):
     '''Read an image file as an array.'''
     img = Image.open(filename)
     arr = asarray(img, dtype=dtype)
-    arr = utils.swap_rgb(arr, _PIL_RGB)
+    utils.swap_rgb(arr, _PIL_RGB, to=utils._PREFERRED_RGB)
+    if normalize:
+        np.normalize(arr)
     return arr
 
 
@@ -42,13 +44,15 @@ def _pil_save(img, filename):
     return
 
 
-def save(img, filename, random=False, ext=None):
+def save(img, filename, random=False, ext=None, normalize=False):
     '''Save an image array and return its path.'''
     if random:
         newfile = utils.rand_filename(filename, ext=ext)
     else:
         newfile = filename
-    np.normalize(img)
+    utils.swap_rgb(img, utils._PREFERRED_RGB, to=_PIL_RGB)
+    if normalize:
+        np.normalize(img)
     uint8img = np.to_uint8(img)
     _pil_save(uint8img, newfile)
     return newfile
