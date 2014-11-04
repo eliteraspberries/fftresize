@@ -26,6 +26,7 @@ _np_dtypes = {
 
 _dtype_bounds = {
     'float32':  (0.0, 1.0),
+    'float64':  (0.0, 1.0),
     'uint8':    (0, 255),
 }
 
