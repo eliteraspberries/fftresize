@@ -24,6 +24,12 @@ _np_dtypes = {
 }
 
 
+_dtype_bounds = {
+    'float32':  (0.0, 1.0),
+    'uint8':    (0, 255),
+}
+
+
 def from_uint8(array, dtype):
     new_array = array.astype(dtype)
     return new_array
@@ -35,6 +41,15 @@ def to_uint8(array):
     return uint8_array
 
 
+def clip(array, (min, max)):
+    '''Clip the values of an array to the given interval.'''
+    x = array < min + _eps
+    y = array > max - _eps
+    array[x] = min
+    array[y] = max
+    return
+
+
 def normalize(array):
     '''Normalize an array to the interval [0,1].'''
     mu = mean(array)
@@ -42,11 +57,8 @@ def normalize(array):
     min = mu - 3.0 * rho2
     max = mu + 3.0 * rho2
     array -= min
-    array /= max - min
-    negs = array < 0.0 + _eps
-    array[negs] = 0.0
-    bigs = array > 1.0 - _eps
-    array[bigs] = 1.0
+    if max - min > _eps:
+        array /= max - min
     return
 
 

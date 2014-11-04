@@ -53,6 +53,7 @@ def save(img, filename, random=False, ext=None, normalize=False):
     utils.swap_rgb(img, utils._PREFERRED_RGB, to=_PIL_RGB)
     if normalize:
         np.normalize(img)
+    np.clip(img, np._dtype_bounds[str(img.dtype)])
     uint8img = np.to_uint8(img)
     _pil_save(uint8img, newfile)
     return newfile
