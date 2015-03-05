@@ -11,7 +11,7 @@ from . import fftinterp
 
 
 __author__ = 'Mansour Moufid'
-__copyright__ = 'Copyright 2013, 2014, Mansour Moufid'
+__copyright__ = 'Copyright 2013-2015, Mansour Moufid'
 __license__ = 'ISC'
 __version__ = '0.5'
 __email__ = 'mansourmoufid@gmail.com'
