@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 '''Read and write image files as NumPy arrays'''
 
@@ -24,7 +24,7 @@ def get_channels(img):
     if utils.depth(img) == 1:
         yield img
     else:
-        for i in xrange(utils.depth(img)):
+        for i in range(utils.depth(img)):
             yield img[:, :, i]
 
 

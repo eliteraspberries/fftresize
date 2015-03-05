@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 from numpy import around, empty as _empty, mean, std
 from numpy import int8, int16, int32, int64
@@ -42,8 +42,9 @@ def to_uint8(array):
     return uint8_array
 
 
-def clip(array, (min, max)):
+def clip(array, bounds):
     '''Clip the values of an array to the given interval.'''
+    (min, max) = bounds
     x = array < min + _eps
     y = array > max - _eps
     array[x] = min

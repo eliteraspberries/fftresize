@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 from os.path import exists, splitext
 from random import randint
@@ -6,7 +6,7 @@ from random import randint
 
 _depth = lambda x, y, z=1: z
 
-_invert_dict = lambda d: dict((v, k) for k, v in d.iteritems())
+_invert_dict = lambda d: dict((v, k) for k, v in list(d.items()))
 
 _PREFERRED_RGB = {
     'R': 0,
@@ -38,8 +38,8 @@ def rand_filename(filename, ext=None):
 def swap_rgb(img, current, to):
     '''Swap the RBG channels of an image array.'''
     if depth(img) == 3 and not current == to:
-        current_indices = map(current.get, ('R', 'G', 'B'))
-        to_indices = map(to.get, ('R', 'G', 'B'))
+        current_indices = list(map(current.get, ('R', 'G', 'B')))
+        to_indices = list(map(to.get, ('R', 'G', 'B')))
         img[:, :, current_indices] = img[:, :, to_indices]
 
 
