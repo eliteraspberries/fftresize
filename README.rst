@@ -1,8 +1,7 @@
 FFTresize resizes images using zero-padding in the frequency
 domain.
 
-.. figure:: https://travis-ci.org/eliteraspberries/fftresize.svg
-   :alt: 
+|image0|
 
 *New*: Get the app for OS X:
 https://www.eliteraspberries.com/hecta/.
@@ -58,3 +57,6 @@ Below is an example image, resized to twice its original size.
 
 .. figure:: http://www.eliteraspberries.com/images/drink-2x.png
    :alt: 
+
+.. |image0| image:: https://travis-ci.org/eliteraspberries/fftresize.svg
+   :target: https://travis-ci.org/eliteraspberries/fftresize
