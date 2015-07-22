@@ -1,6 +1,8 @@
 FFTresize resizes images using zero-padding in the frequency
 domain.
 
+![](https://travis-ci.org/eliteraspberries/fftresize.svg)
+
 *New*: Get the app for OS X: <https://www.eliteraspberries.com/hecta/>.
 
 
