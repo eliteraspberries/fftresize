@@ -60,5 +60,5 @@ Below is an example image, resized to twice its original size.
 
 .. |image0| image:: https://travis-ci.org/eliteraspberries/fftresize.svg
    :target: https://travis-ci.org/eliteraspberries/fftresize
-.. |image1| image:: https://img.shields.io/pypi/v/nine.svg
+.. |image1| image:: https://img.shields.io/pypi/v/FFTresize.svg
    :target: https://pypi.python.org/pypi/FFTresize
