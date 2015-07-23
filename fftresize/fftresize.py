@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 '''FFTresize resizes images using zero-padding in the frequency
 domain.

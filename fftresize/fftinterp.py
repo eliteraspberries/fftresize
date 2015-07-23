@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 '''2D interpolation using zero-padding in the frequency domain
 '''
@@ -26,10 +26,10 @@ def _zeropad2(x, shape):
 def interp2(array, factor):
     '''Interpolate a two-dimensional NumPy array by a given factor.
     '''
-    reshape = lambda (x, y): [int(factor * x), int(factor * y)]
-    diff = lambda (x, y): [x - array.shape[0], y - array.shape[1]]
+    reshape = lambda xy: [int(factor * xy[0]), int(factor * xy[1])]
+    diff = lambda xy: [xy[0] - array.shape[0], xy[1] - array.shape[1]]
     nexteven = lambda x: x if (x % 2 == 0) else x + 1
-    delta = map(nexteven, diff(reshape(array.shape)))
+    delta = list(map(nexteven, diff(reshape(array.shape))))
     newsize = tuple(x[0] + x[1] for x in zip(array.shape, delta))
     fft = fft2(array)
     fft = fftshift(fft)
