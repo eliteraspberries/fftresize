@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 from distutils.core import setup
 
@@ -11,7 +11,7 @@ _classifiers = [
     'Intended Audience :: End Users/Desktop',
     'License :: OSI Approved :: ISC License (ISCL)',
     'Operating System :: OS Independent',
-    'Programming Language :: Python :: 2',
+    'Programming Language :: Python',
     'Topic :: Multimedia :: Graphics',
 ]
 
