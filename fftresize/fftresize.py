@@ -13,7 +13,7 @@ from . import fftinterp
 __author__ = 'Mansour Moufid'
 __copyright__ = 'Copyright 2013-2015, Mansour Moufid'
 __license__ = 'ISC'
-__version__ = '0.6'
+__version__ = '0.7'
 __email__ = 'mansourmoufid@gmail.com'
 __status__ = 'Development'
 
