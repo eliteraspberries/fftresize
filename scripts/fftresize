@@ -3,7 +3,7 @@
 '''FFTresize - Resize images using the FFT
 
 Usage:
-    fftresize <image> <factor>
+    fftresize <factor> <file>...
     fftresize -h | --help
     fftresize -v | --version
 
@@ -36,16 +36,15 @@ if '__main__' in __name__:
 
     arguments = docopt(__doc__, version=_long_version)
 
-    image = arguments['<image>']
-    image = abspath(expanduser(image))
-    if not exists(image):
-        error('could not find file: ' + image)
-        exit(EX_NOINPUT)
-
     factor = float(arguments['<factor>'])
     if factor < 1.0 + float_info.epsilon:
         error('factor must be greater than 1.0')
         exit(EX_USAGE)
 
-    x = fftresize.resize(image, factor)
-    print(x)
+    files = arguments['<file>']
+    files = filter(lambda f: abspath(expanduser(f)), files)
+    for image in files:
+        if not exists(image):
+            error('could not find file: ' + image)
+        x = fftresize.resize(image, factor)
+        print(x)
