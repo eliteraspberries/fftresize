@@ -35,7 +35,7 @@ the image (1.0 meaning no change).
     FFTresize - Resize images using the FFT
 
     Usage:
-        fftresize <image> <factor>
+        fftresize <factor> <file>...
         fftresize -h | --help
         fftresize -v | --version
 
