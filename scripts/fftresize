@@ -22,7 +22,21 @@ except ImportError:
 from os.path import abspath, exists, expanduser
 from sys import exit, float_info, stderr
 
+from avena import image, interp
 from fftresize import fftresize
+
+
+_EXT = '.png'
+
+
+def resize(filename, factor=1.5):
+    '''Resize an image by zero-padding in the frequency domain.
+
+    Return the filename of the resized image.
+    '''
+    img = image.read(filename)
+    new = interp.interp2(img, factor)
+    return image.save(new, filename, random=True, ext=_EXT, normalize=True)
 
 
 _long_version = 'FFTresize ' + fftresize.__version__
@@ -43,8 +57,8 @@ if '__main__' in __name__:
 
     files = arguments['<file>']
     files = filter(lambda f: abspath(expanduser(f)), files)
-    for image in files:
-        if not exists(image):
-            error('could not find file: ' + image)
-        x = fftresize.resize(image, factor)
+    for img in files:
+        if not exists(img):
+            error('could not find file: ' + img)
+        x = resize(img, factor)
         print(x)
