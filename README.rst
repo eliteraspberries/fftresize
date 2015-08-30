@@ -9,19 +9,12 @@ https://www.eliteraspberries.com/hecta/.
 Installation
 ============
 
-FFTresize requires docopt, PIL, and NumPy.
+FFTresize requires the
+`Avena <https://pypi.python.org/pypi/Avena>`__ and
+`docopt <http://docopt.org/>`__ libraries.
 
-FFTresize consists of a package and a script.
-
-To install these from the source code,
-
-::
-
-    gunzip < FFTresize-0.7.tar.gz | tar -xf -
-    cd FFTresize-0.7/
-    python setup.py install
-
-or with pip,
+Install FFTresize with
+`pip <https://pip.pypa.io/en/stable/>`__,
 
 ::
 

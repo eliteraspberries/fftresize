@@ -10,17 +10,9 @@ domain.
 Installation
 ============
 
-FFTresize requires docopt, PIL, and NumPy.
+FFTresize requires the [Avena][] and [docopt][] libraries.
 
-FFTresize consists of a package and a script.
-
-To install these from the source code,
-
-    gunzip < FFTresize-0.7.tar.gz | tar -xf -
-    cd FFTresize-0.7/
-    python setup.py install
-
-or with pip,
+Install FFTresize with [pip][],
 
     pip install fftresize
 
@@ -54,6 +46,9 @@ Below is an example image, resized to twice its original size.
 ![][resized-img]
 
 
+[Avena]: https://pypi.python.org/pypi/Avena
+[docopt]: http://docopt.org/
+[pip]: https://pip.pypa.io/en/stable/
 [example-img]: http://www.eliteraspberries.com/images/drink.png
 [resized-img]: http://www.eliteraspberries.com/images/drink-2x.png
 [build-status]: https://travis-ci.org/eliteraspberries/fftresize
