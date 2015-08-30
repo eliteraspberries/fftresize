@@ -4,10 +4,7 @@
 domain.
 '''
 
-from avena import image, utils
-from numpy import zeros as _zeros
-
-from . import fftinterp
+from avena import image, interp
 
 
 __author__ = 'Mansour Moufid'
@@ -27,19 +24,7 @@ def resize(filename, factor=1.5):
     Return the filename of the resized image.
     '''
     img = image.read(filename)
-    nchannels = utils.depth(img)
-    if nchannels == 1:
-        new = fftinterp.interp2(img, factor)
-    else:
-        new = None
-        for i in range(nchannels):
-            rgb = img[:, :, i]
-            newrgb = fftinterp.interp2(rgb, factor)
-            if new is None:
-                newsize = list(newrgb.shape)
-                newsize.append(nchannels)
-                new = _zeros(tuple(newsize))
-            new[:, :, i] = newrgb
+    new = interp.interp2(img, factor)
     return image.save(new, filename, random=True, ext=_EXT, normalize=True)
 
 

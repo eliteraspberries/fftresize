@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+try:
+    from setuptools import setup
+except ImportError:
+    from distutils.core import setup
 
 from fftresize import fftresize
 
@@ -30,8 +33,15 @@ _setup_args = {
     'version':          fftresize.__version__,
 }
 
+_requirements = [
+    'Avena >= 0.6',
+    'docopt',
+]
+
+_setup_args['install_requires'] = _requirements
+
 
 if __name__ == '__main__':
 
-    setup(packages=['avena', 'fftresize'], scripts=['scripts/fftresize'],
+    setup(packages=['fftresize'], scripts=['scripts/fftresize'],
           **_setup_args)
