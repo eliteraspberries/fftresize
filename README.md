@@ -3,6 +3,7 @@ domain.
 
 [![](https://travis-ci.org/eliteraspberries/fftresize.svg)][build-status]
 [![](https://img.shields.io/pypi/v/FFTresize.svg)][pypi]
+![](https://img.shields.io/github/license/eliteraspberries/fftresize.svg)
 
 *New*: Get the app for OS X: <https://www.eliteraspberries.com/hecta/>.
 
