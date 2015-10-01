@@ -56,7 +56,7 @@ if '__main__' in __name__:
         exit(EX_USAGE)
 
     files = arguments['<file>']
-    files = filter(lambda f: abspath(expanduser(f)), files)
+    files = [abspath(expanduser(f)) for f in files]
     for img in files:
         if not exists(img):
             error('could not find file: ' + img)
