@@ -9,7 +9,7 @@ from fftresize import fftresize
 
 
 _classifiers = [
-    'Development Status :: 4 - Beta',
+    'Development Status :: 5 - Production/Stable',
     'Environment :: Console',
     'Intended Audience :: End Users/Desktop',
     'License :: OSI Approved :: ISC License (ISCL)',
